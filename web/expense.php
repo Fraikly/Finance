@@ -17,4 +17,4 @@ foreach ($all_expense as $value){
 }
 
 echo $sum;
-?>
+
