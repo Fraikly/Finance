@@ -1,5 +1,7 @@
 <?php
+//connecting the db
 include 'info.php';
+
 //const HOST = 'localhost';
 //const DBNAME = '';
 //const USERNAME='root';
