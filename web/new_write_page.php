@@ -7,8 +7,7 @@ require_once "html/header.html";
 
 
 <?php
-const CATEGORY = ["Без названия","Развлечение","Еда","Здоровье","Другое"];
-require 'index.php';
+require_once 'BdRecordsClass.php';
 require_once 'html/body_write.html';
 
 
