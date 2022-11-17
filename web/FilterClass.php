@@ -2,7 +2,7 @@
 
 class FilterClass
 {
-    static function setFilter(){
+    static function setFilter($category){
         //set date
         $date_filter=self::setDateFilter();
         if($date_filter!=0){
@@ -14,7 +14,7 @@ class FilterClass
         }
 
         //set category
-        $category_filter=self::setCategoryFilter();
+        $category_filter=self::setCategoryFilter($category);
         if($category_filter!=0){
             $filters['category']="category='{$category_filter}'";
         }
@@ -58,11 +58,11 @@ class FilterClass
         return $date_filter;
     }
 
-    private static function setCategoryFilter(){
+    private static function setCategoryFilter($category){
         if($_COOKIE["category_filter"]=="all" or $_COOKIE["category_filter"]==null )
             return 0;
         else
-            return BdRecordsClass::CATEGORY[$_COOKIE['category_filter']];
+            return $category[$_COOKIE['category_filter']];
 
     }
 }

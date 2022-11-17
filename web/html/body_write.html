@@ -1,9 +1,9 @@
 <body>
 <div class="content_write">
     <p class="list_2">Добавление записи</p>
-    <p class="heading_2"> Затрата</p>
+    <p class="heading_2" <?php if($listName == "Прибыль") echo 'style="left: 28.5%"' ?> > <?php echo $listName ?> </p>
     <table class="new_write">
-<form method="post" action="expense_page.php" onsubmit="return check();" name="form">
+<form method="post" action=<?php if($listName == "Прибыль") echo 'income_page.php'; else echo "expense_page.php" ?> onsubmit="return check();" name="form">
 
     <tr>
         <td>Введите название</td>
@@ -19,13 +19,13 @@
 
     <tr>
         <td> <select name="category" class="option_choice">
-            <?php foreach (BdRecordsClass::CATEGORY as $category): ?>
+            <?php foreach ($category as $category): ?>
         <option value="<?php echo $category ?>" ><?php echo $category ?></option>
             <?php endforeach; ?>
 
             </select>
         </td>
-    </tr>>
+    </tr>
 
     <tr>
         <td>Стоимость:</td>
@@ -36,7 +36,7 @@
     </tr>
 
     <tr>
-        <td>Дата траты:</td>
+        <td> <?php if($listName == "Прибыль") echo 'Дата прибыли:'; else echo "Дата траты:" ?></td>
     </tr>
 
     <tr>

@@ -9,12 +9,19 @@ require 'index.php';
  class BdRecordsClass
 {
     const COLUMN_NAMES=['name', 'category', 'count', 'date'];
-    const CATEGORY = [
+    const CATEGORY_EXPENSE = [
         "noName" =>"Без названия",
         "entertainment" => "Развлечение",
         "food" => "Еда",
         "health" => "Здоровье",
         "other" => "Другое"];
+     const CATEGORY_INCOME= [
+         "noName" =>"Без названия",
+         "job" => "Работа",
+         "sale" => "Продажа",
+         "present" => "Подарок",
+         "winning" => "Выигрыш",
+         "other" => "Другое"];
     const DATE_FILTER=[
         "1month" => "Месяц",
         "3month" => "3 Месяца",
@@ -32,9 +39,11 @@ require 'index.php';
     }
 
 
-    static function getRecords($tableName){
+    static function getRecords($tableName,$category){
+
         require 'FilterClass.php';
-        $filters=FilterClass::setFilter();
+        $filters=FilterClass::setFilter($category);
+
 
         $request="SELECT * FROM {$tableName}";
 

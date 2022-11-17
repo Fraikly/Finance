@@ -3,11 +3,10 @@
 <?php
 $title="Создание новой записи";
 require_once "html/header.html";
-?>
 
-
-<?php
 require_once 'BdRecordsClass.php';
+$listName="Прибыль";
+$category =BdRecordsClass::CATEGORY_INCOME;
 require_once 'html/body_write.html';
 
 

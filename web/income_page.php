@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
-$title="Расходы";
+$title="Доходы";
 require_once "html/header.html";
 ?>
 
@@ -23,10 +23,10 @@ if(isset($_POST["category_filter"]))
         $reload=true;
     }
 
-$tableName="expenses";
-$fileName="expense_page.php";
-$listName="Список расходов";
-$category=BdRecordsClass::CATEGORY_EXPENSE;
+$tableName="income";
+$fileName="income_page.php";
+$listName="Список доходов";
+$category=BdRecordsClass::CATEGORY_INCOME;
 
 //if we have new record
 if($_POST['name']!=null) {
@@ -36,11 +36,11 @@ if($_POST['name']!=null) {
 
 //reload page
 if($reload){
-    header('Location: expense_page.php');
+    header('Location: income_page.php');
 }
 
 //get records
-$all_expense=BdRecordsClass::getRecords($tableName,$category);
+$all_expense=BdRecordsClass::getRecords($tableName, $category);
 
 
 //sum of count

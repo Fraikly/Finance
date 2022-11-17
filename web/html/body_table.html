@@ -1,7 +1,7 @@
 <body>
 <div class="content">
 
-    <p class="list">Список расходов</p>
+    <p class="list"><?php echo $listName;?></p>
     <p class="heading">Таблица</p>
 
     <div class="tables">
@@ -28,7 +28,7 @@
         </table>
 
         <div class="filter">
-        <form method="post" action="expense_page.php">
+        <form method="post" action= <?php echo $fileName?> >
         <table class="options">
             <tr>
                 <th>Настройка</th>
@@ -54,7 +54,7 @@
                 <td> <select class="option_choice" name="category_filter">
 
                     <option value= "all" > Все </option>
-                    <?php foreach(BdRecordsClass::CATEGORY as  $key => $value): ?>
+                    <?php foreach($category as  $key => $value): ?>
                     <option value= <?php echo $key ?> <?php if($_COOKIE['category_filter'] == $key){ echo 'selected';}?> ><?php echo $value ?> </option>
                     <?php endforeach; ?>
 
@@ -65,7 +65,7 @@
                 <td><button type="submit" class="submit_button">Применить</button></td>
             </tr>
         </form>
-        <form action="new_write_page.php">
+        <form action=<?php if($fileName == "expense_page.php"){ echo 'expense_write_page.php';} else {echo 'income_write_page.php';}?>>
             <tr>
                 <td> <button type="submit" class="add">Добавить в список</button></td>
             </tr>
