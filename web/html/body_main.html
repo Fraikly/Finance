@@ -1,0 +1,14 @@
+
+<body>
+<div class="main_page">
+    <?php if(AuthorizationClass::isAutorized()): ?>
+    <p class="welcome">Добро пожаловать, <label class="user"><?php echo $_COOKIE["username"]?> </label></p>
+    <?php else: ?>
+    <p class="welcome">Добро пожаловать</p>
+    <p class="welcome"> Пожалуйста, <a href="registration_page.php"> зарегистрируйтесь </a> или<br> <a href="login_page.php" >войдите в систему </a></p>
+
+
+    <?php endif; ?>
+</div>
+</body>
+</html>

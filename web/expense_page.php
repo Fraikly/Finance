@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 $title="Расходы";
+
 require_once "html/header.html";
 ?>
 
@@ -27,10 +28,12 @@ $tableName="expenses";
 $fileName="expense_page.php";
 $listName="Список расходов";
 $category=BdRecordsClass::CATEGORY_EXPENSE;
+$columns=BdRecordsClass::COLUMN_NAMES;
+
 
 //if we have new record
 if($_POST['name']!=null) {
-    BdRecordsClass::createNewRecord($tableName);
+    BdRecordsClass::createNewRecord($tableName, $columns);
     $reload=true;
 }
 

@@ -8,7 +8,8 @@ require 'index.php';
 
  class BdRecordsClass
 {
-    const COLUMN_NAMES=['name', 'category', 'count', 'date'];
+    const USER_COLUMN_NAMES=['username','email','password'];
+    const COLUMN_NAMES=['user_id','name', 'category', 'count', 'date'];
     const CATEGORY_EXPENSE = [
         "noName" =>"Без названия",
         "entertainment" => "Развлечение",
@@ -28,12 +29,26 @@ require 'index.php';
         "year" => "Год",
         "all" => "За все время"];
 
-   static function createNewRecord($tableName){
+   static function createNewRecord($tableName, $columns){
         $table = R::dispense($tableName);
 
-        foreach (self::COLUMN_NAMES as $column){
-            $table->$column= $_POST[$column];
+        //if we create user record
+        if($columns==self::USER_COLUMN_NAMES){
+            foreach ($columns as $column){
+                    $table->$column= $_COOKIE[$column];
+            }
         }
+        //if we create income/expense record
+        else{
+            foreach ($columns as $column){
+                if($column=="user_id"){
+                    $table->$column=self::getUserId();
+                }
+                else
+                     $table->$column= $_POST[$column];
+            }
+        }
+
 
         R::store($table);
     }
@@ -43,13 +58,13 @@ require 'index.php';
 
         require 'FilterClass.php';
         $filters=FilterClass::setFilter($category);
+        $user_id=self::getUserId();
 
-
-        $request="SELECT * FROM {$tableName}";
+        $request="SELECT * FROM {$tableName} WHERE user_id = '{$user_id}'";
 
         //if we have filter
         if($filters['date']!=null or $filters['category']!=null){
-            $request.=" WHERE ";
+            $request.=" AND ";
 
             if($filters["date"]!=null)
                 $request.=$filters['date'];
@@ -86,6 +101,12 @@ require 'index.php';
             $sum+=$value["count"];
         }
         return $sum;
+    }
+
+    static function getUserId(){
+    $res= R::getAll("SELECT id FROM users WHERE username = '{$_COOKIE['username']}'");
+    return $res[0]["id"];
+
     }
 
 }

@@ -3,7 +3,9 @@
 
     <p class="list"><?php echo $listName;?></p>
     <p class="heading">Таблица</p>
-
+    <?php if(!AuthorizationClass::isAutorized()): ?>
+    <p class="warning"><?php echo $listName;?> доступен только <label style="color: #ac6ee8">авторизованным</label> пользователям</p>
+    <?php endif; ?>
     <div class="tables">
 
         <table class="bd_list">
@@ -28,7 +30,7 @@
         </table>
 
         <div class="filter">
-        <form method="post" action= <?php echo $fileName?> >
+        <form method="post" action= <?php echo $fileName?> onsubmit="return check_autorization();">
         <table class="options">
             <tr>
                 <th>Настройка</th>
@@ -65,7 +67,7 @@
                 <td><button type="submit" class="submit_button">Применить</button></td>
             </tr>
         </form>
-        <form action=<?php if($fileName == "expense_page.php"){ echo 'expense_write_page.php';} else {echo 'income_write_page.php';}?>>
+        <form onsubmit="return check_autorization();" action=<?php if($fileName == "expense_page.php"){ echo 'expense_write_page.php';} else {echo 'income_write_page.php';}?> >
             <tr>
                 <td> <button type="submit" class="add">Добавить в список</button></td>
             </tr>
@@ -83,3 +85,13 @@
 
 </div>
 </body>
+<script language="JavaScript">
+    function check_autorization(){
+        <?php if($_COOKIE["username"]): ?> return true;
+        <?php else: ?> {
+            window.alert("Вы не авторизированы")
+        }
+        <?php endif; ?>
+        return false;
+    }
+</script>

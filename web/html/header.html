@@ -1,3 +1,5 @@
+<?php require_once 'AuthorizationClass.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +12,19 @@
 <header>
 
     <lable class="header_category">
-        <a href="/" class="main"> Главная </a>
+        <a href="main_page.php" class="main"> Главная </a>
         <a href="expense_page.php" class="expense"> Расходы </a>
         <a href="income_page.php" class="income">Доходы </a>
+
+        <?php if(AuthorizationClass::isAutorized()): ?>
+        <lable class="username"><?php echo $_COOKIE["username"] ?> <img src="pic/user.png"class="user_pic"> /
+                <a class="other" href="log_out.php" onclick="return confirm('Вы уверены, что хотите выйти?')">Выйти</a> </lable>
+        <?php else: ?>
+        <lable class="username">  <a href="registration_page.php" class="other"> Зарегистрироваться </a>  /   <a href="login_page.php" class="other">Войти </a></lable>
+        <?php endif; ?>
+
     </lable>
+
 
 </header>
 

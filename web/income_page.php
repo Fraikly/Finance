@@ -23,14 +23,16 @@ if(isset($_POST["category_filter"]))
         $reload=true;
     }
 
+
 $tableName="income";
 $fileName="income_page.php";
 $listName="Список доходов";
 $category=BdRecordsClass::CATEGORY_INCOME;
+$columns=BdRecordsClass::COLUMN_NAMES;
 
 //if we have new record
 if($_POST['name']!=null) {
-    BdRecordsClass::createNewRecord($tableName);
+    BdRecordsClass::createNewRecord($tableName,$columns);
     $reload=true;
 }
 
