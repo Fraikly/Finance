@@ -42,9 +42,9 @@ static function getBalance(){
     if(isset($_COOKIE['cashBalance']))
         return $_COOKIE['cashBalance'];
     require_once 'BdRecordsClass.php';
-    $all_income=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('income',BdRecordsClass::CATEGORY_INCOME));
-    $all_expense=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('expenses',BdRecordsClass::CATEGORY_EXPENSE));
+    $all_income=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('income',BdRecordsClass::CATEGORY_INCOME,0,0,"all"));
+    $all_expense=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('expenses',BdRecordsClass::CATEGORY_EXPENSE,0,0,"all"));
     setcookie('cashBalance',$all_income-$all_expense);
-    return $all_income-$all_expense ;
+    return $all_income- $all_expense;
 }
 }

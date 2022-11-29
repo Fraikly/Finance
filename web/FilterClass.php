@@ -2,7 +2,8 @@
 
 class FilterClass
 {
-    static function setFilter($category, $month=0,$findcategory=0){
+    static function setFilter($category, $month=0,$findcategory=0,$method=0){
+        if($method=="all") return null;
         //set date
         $date_filter=self::setDateFilter($month);
 
@@ -20,7 +21,6 @@ class FilterClass
         else{
             $filters["date"]=null;
         }
-
         //set category
         $category_filter=self::setCategoryFilter($category,$findcategory);
         if($category_filter!=0){
@@ -39,13 +39,16 @@ class FilterClass
     private static function setDateFilter($month=0){
         if(isset($_COOKIE["year"]) and $month!=0){
             $date_filter=date("{$_COOKIE["year"]}-{$month}-01");
+
         }
 
         else if(isset($_COOKIE["year"])){
             $date_filter=date("{$_COOKIE["year"]}-01-01");
+
         }
         else if($_COOKIE["date_filter"]==null or $_COOKIE["date_filter"]=="1month"){
             $date_filter = date("Y-n-01");
+
         }
 
         else{
