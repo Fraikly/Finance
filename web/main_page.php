@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 $title="Главная";
+require_once "AuthorizationClass.php";
 require_once "html/header.html";
 require_once "BdRecordsClass.php";
-require_once "AuthorizationClass.php";
+
 
 
 //if we have new user

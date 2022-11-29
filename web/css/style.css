@@ -76,7 +76,13 @@ header {
 }
 
 .income{
-    left: 40%;
+    padding-right: 3%;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.statistics{
+    padding-right: 3%;
     color: #FFFFFF;
     text-decoration: none;
 }
@@ -647,4 +653,126 @@ footer{
 .welcome a{
     text-decoration: none;
     color: #8000FF;
+}
+/*stattistic page*/
+.statistics_page{
+
+    position: relative;
+
+    left: 20%;
+
+    width: 81%;
+
+    top: 8%;
+
+    margin-bottom: 10%;
+}
+
+.statistics_list{
+
+    text-align: center;
+
+    position: relative;
+
+    /* left: 41.5%; */
+
+    /* top: 1%; */
+
+    font-family: 'Roboto';
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    font-size: 32px;
+
+    line-height: 26px;
+
+    background: linear-gradient(89.23deg, #8000FF -12.13%, #FFFFFF 179.91%);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+.statistics_year{
+
+    position: relative;
+
+    color: white;
+
+    font-family: 'Roboto';
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    font-size: 64px;
+
+    /* left: 42.1%; */
+
+    text-align: center;
+}
+.year_button{
+
+    /* color: black; */
+
+    background: black;
+
+    border-color: black;
+
+    color: #999999;
+
+    font-family: 'Roboto';
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    font-size: 64px;
+    cursor: pointer;
+}
+.statistics_table_year{
+    color: white;
+    background-image:linear-gradient(#8000FF,#FFFFFF);
+    background-origin: border-box;
+    border-spacing: 5px;
+    border: 5px solid transparent;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+.table_head_statistics{
+    background-color:#8000FF !important;
+    width: 100%;
+    color: #939292;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    border-bottom: solid 2px #8000FF;
+    border-top: solid 2px #8000FF;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+.statistics_table_year td{
+    border-right: solid 1px #8000FF;
+}
+.month_button{
+
+    color: white;
+
+    background-color: #8000ff3d;
+
+    border: black;
+
+    font-family: 'Roboto';
+
+    font-style: normal;
+
+    font-weight: 400;
+
+    font-size: 18px;
+
+    width: 100%;
+    cursor: pointer;
 }

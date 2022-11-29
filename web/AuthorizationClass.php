@@ -38,4 +38,13 @@ static function isUserExists(){
     $password = md5($_POST['password']);
     return R::getAll("SELECT * FROM users WHERE username='{$_POST['username']}' and password='{$password}'")!=null;
 }
+static function getBalance(){
+    if(isset($_COOKIE['cashBalance']))
+        return $_COOKIE['cashBalance'];
+    require_once 'BdRecordsClass.php';
+    $all_income=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('income',BdRecordsClass::CATEGORY_INCOME));
+    $all_expense=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('expenses',BdRecordsClass::CATEGORY_EXPENSE));
+    setcookie('cashBalance',$all_income-$all_expense);
+    return $all_income-$all_expense ;
+}
 }

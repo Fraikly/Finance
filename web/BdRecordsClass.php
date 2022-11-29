@@ -7,7 +7,20 @@ require 'index.php';
 
 
  class BdRecordsClass
-{
+{    const MONTH=[
+     '1'=>'Январь',
+     '2'=>'Февраль',
+     '3'=>'Март',
+     '4'=>'Апрель',
+     '5'=>'Май',
+     '6'=>'Июнь',
+     '7'=>'Июль',
+     '8'=>'Август',
+     '9'=>'Сентябрь',
+     '10'=>'Октябрь',
+     '11'=>'Ноябрь',
+     '12'=>'Декабрь'
+                    ];
     const USER_COLUMN_NAMES=['username','email','password'];
     const COLUMN_NAMES=['user_id','name', 'category', 'count', 'date'];
     const CATEGORY_EXPENSE = [
@@ -54,11 +67,12 @@ require 'index.php';
     }
 
 
-    static function getRecords($tableName,$category){
-
-        require 'FilterClass.php';
-        $filters=FilterClass::setFilter($category);
+    static function getRecords($tableName,$category,$month=0,$findcategory=0){
+        require_once 'FilterClass.php';
+        $filters=FilterClass::setFilter($category,$month,$findcategory);
+//        var_dump($filters);
         $user_id=self::getUserId();
+//        echo $user_id;
 
         $request="SELECT * FROM {$tableName} WHERE user_id = '{$user_id}'";
 
@@ -76,7 +90,7 @@ require 'index.php';
                 $request.=$filters['category'];
 
         }
-
+//        echo $request;
         $all_records=R::getAll($request);
 
         //if we got no one records
@@ -100,6 +114,7 @@ require 'index.php';
         foreach ($all_records as $value){
             $sum+=$value["count"];
         }
+        R::close();
         return $sum;
     }
 

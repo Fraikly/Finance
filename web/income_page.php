@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
+require_once "AuthorizationClass.php";
 $title="Доходы";
 require_once "html/header.html";
 ?>
@@ -12,6 +13,12 @@ require_once 'BdRecordsClass.php';
 $reload = false;
 
 //COOKIE
+if(isset($_COOKIE["year"])){
+    setcookie("year","",time());
+    $reload=true;
+}
+
+
 if(isset($_POST["date_filter"]))
     if($_COOKIE["date_filter"]!=$_POST["date_filter"]){
         setcookie("date_filter",$_POST["date_filter"]);
@@ -33,6 +40,7 @@ $columns=BdRecordsClass::COLUMN_NAMES;
 //if we have new record
 if($_POST['name']!=null) {
     BdRecordsClass::createNewRecord($tableName,$columns);
+    setcookie("cashBalance",'',time());
     $reload=true;
 }
 
