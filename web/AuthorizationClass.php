@@ -45,7 +45,8 @@ static function getBalance(){
     $all_income=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('income',BdRecordsClass::CATEGORY_INCOME,0,0,"all"));
     $all_expense=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('expenses',BdRecordsClass::CATEGORY_EXPENSE,0,0,"all"));
     setcookie('cashBalance',$all_income-$all_expense);
-    setcookie('currency','RUB');
+    require_once 'AccountClass.php';
+    setcookie('currency',AccountClass::getCurrency());
     return $all_income- $all_expense;
 }
 }

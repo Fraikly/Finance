@@ -1,7 +1,7 @@
 
 <body>
 <div class="statistics_page">
-    <p class="statistics_list">Статистика за</p>
+    <p class="statistics_list">Статистика для счёта <?php echo $_COOKIE['account']." ". AccountClass::getCurrency(); ?> за</p>
     <form class="statistics_year" action="statistics_page.php" method="post">
         <button type="submit" name="changeYear" value="-1" class="year_button"> < </button>
         <label > <?php echo $_COOKIE['year'] ?></label>

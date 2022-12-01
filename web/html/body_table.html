@@ -5,6 +5,8 @@
     <p class="heading">Таблица</p>
     <?php if(!AuthorizationClass::isAutorized()): ?>
     <p class="warning"><?php echo $listName;?> доступен только <label style="color: #ac6ee8">авторизованным</label> пользователям</p>
+    <?php else:?>
+    <p class="warning">Вы смотрите на <?php echo $listName;?> для счёта <label style="color: #ac6ee8"> <?php echo $_COOKIE['account']." ". AccountClass::getCurrency(); ?> </label></p>
     <?php endif; ?>
     <div class="tables">
 
@@ -87,11 +89,18 @@
 </body>
 <script language="JavaScript">
     function check_autorization(){
-        <?php if($_COOKIE["username"]): ?> return true;
+        <?php if(isset($_COOKIE["username"])): ?>
+             <?php if(BdRecordsClass::getRecords('account')==null): ?>
+                         window.alert("У вас нет счёта")
+                         <?php else: ?>
+                    return true;
+             <?php endif; ?>
+
         <?php else: ?> {
             window.alert("Вы не авторизированы")
         }
         <?php endif; ?>
+
         return false;
     }
 </script>

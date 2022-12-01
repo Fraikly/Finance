@@ -22,7 +22,8 @@ require 'index.php';
      '12'=>'Декабрь'
                     ];
     const USER_COLUMN_NAMES=['username','email','password'];
-    const COLUMN_NAMES=['user_id','name', 'category', 'count', 'date'];
+    const ACCOUNT_COLUMN_NAMES=['user_id','name','currency'];
+    const COLUMN_NAMES=['user_id','account_id','name', 'category', 'count', 'date'];
     const CATEGORY_EXPENSE = [
         "noName" =>"Без названия",
         "entertainment" => "Развлечение",
@@ -51,11 +52,25 @@ require 'index.php';
                     $table->$column= $_COOKIE[$column];
             }
         }
+        //if we create new account
+        else if($columns==self::ACCOUNT_COLUMN_NAMES){
+            foreach ($columns as $column){
+                if($column=="user_id"){
+                    $table->$column=self::getUserId();
+                }
+                else
+                    $table->$column= $_POST[$column];
+            }
+
+        }
         //if we create income/expense record
         else{
             foreach ($columns as $column){
                 if($column=="user_id"){
                     $table->$column=self::getUserId();
+                }
+                else if($column=="account_id"){
+                    $table->$column=self::getAccountId();
                 }
                 else
                      $table->$column= $_POST[$column];
@@ -67,14 +82,19 @@ require 'index.php';
     }
 
 
-    static function getRecords($tableName,$category,$month=0,$findcategory=0,$method=0){
+    static function getRecords($tableName,$category=0,$month=0,$findcategory=0,$method=0){
         require_once 'FilterClass.php';
-        $filters=FilterClass::setFilter($category,$month,$findcategory,$method);
+
+        if($category!=0)
+            $filters=FilterClass::setFilter($category,$month,$findcategory,$method);
 
         $user_id=self::getUserId();
+        $account_id=self::getAccountId();
 
         $request="SELECT * FROM {$tableName} WHERE user_id = '{$user_id}'";
-
+        if($tableName!="account"){
+            $request.=" AND account_id='{$account_id}'";
+        }
         //if we have filter
         if($filters['date']!=null or $filters['category']!=null){
             $request.=" AND ";
@@ -93,7 +113,7 @@ require 'index.php';
         $all_records=R::getAll($request);
 
         //if we got no one records
-        if($all_records==null){
+        if($all_records==null and $tableName!="account"){
             $all_records= self::getNullRecord();
         }
 
@@ -122,5 +142,11 @@ require 'index.php';
     return $res[0]["id"];
 
     }
+
+     static function getAccountId(){
+         $res= R::getAll("SELECT id FROM account WHERE name = '{$_COOKIE['account']}'");
+         return $res[0]["id"];
+
+     }
 
 }

@@ -1,6 +1,7 @@
 <?php
-//if we change to rub, we take data from the database
-if($_POST["currency"]=="RUB"){
+require_once "AccountClass.php";
+//if we change to account-currency, we take data from the database
+if($_POST["currency"]==AccountClass::getCurrency()){
     require_once "AuthorizationClass.php";
     setcookie("cashBalance",'',time());
     AuthorizationClass::getBalance();
@@ -16,10 +17,13 @@ else{
             $new_price = round(($_COOKIE["cashBalance"] * $response_object->rates->USD), 2);
         if($_POST["currency"]=="EUR")
             $new_price = round(($_COOKIE["cashBalance"] * $response_object->rates->EUR), 2);
+        if($_POST["currency"]=="RUB")
+            $new_price = round(($_COOKIE["cashBalance"] * $response_object->rates->RUB), 2);
         setcookie('cashBalance',$new_price);
     }
 }
 setcookie('currency',$_POST["currency"]);
+setcookie('reload',true);
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 

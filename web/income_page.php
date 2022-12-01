@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 
-
+require_once "AccountClass.php";
 require_once 'BdRecordsClass.php';
 
 $reload = false;
@@ -35,12 +35,14 @@ $columns=BdRecordsClass::COLUMN_NAMES;
 if($_POST['name']!=null) {
     BdRecordsClass::createNewRecord($tableName,$columns);
     setcookie("cashBalance",'',time());
-    setcookie('currency','RUB');
+    require_once "AccountClass.php";
+    setcookie('currency',AccountClass::getCurrency());
     $reload=true;
 }
 
 //reload page
-if($reload){
+if($reload ||$_COOKIE["reload"]){
+    setcookie('reload','',time());
     header('Location: income_page.php');
 }
 

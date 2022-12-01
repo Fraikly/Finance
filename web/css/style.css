@@ -643,6 +643,16 @@ footer{
     font-size: 35px;
     color: white;
 }
+.account_choice{
+    background-color: black;
+    border-color: black;
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: white;
+}
 .main_page{
 
     width: 80%;
@@ -653,7 +663,7 @@ footer{
 
     /* vertical-align: middle; */
 
-    height: 57%;
+    height: 63%;
 
     text-align: center;
 

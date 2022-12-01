@@ -15,12 +15,7 @@
 </body>
 </html>
 <script language="JavaScript">
-        if( <?php  echo $warning ?> )
-        {
-            setTimeout(function () {
-                window.alert("Имя пользователя или адрес электронный почты занят"); }, 200);
 
-        }
 
     function check(){
 
@@ -63,4 +58,8 @@
         else
             return true;
     }
+    <?php if($warning):?>
+    setTimeout(function () {
+        window.alert("Имя пользователя или адрес электронный почты занят"); }, 200);
+    <?php endif; ?>
 </script>
