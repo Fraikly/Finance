@@ -70,9 +70,8 @@ require 'index.php';
     static function getRecords($tableName,$category,$month=0,$findcategory=0,$method=0){
         require_once 'FilterClass.php';
         $filters=FilterClass::setFilter($category,$month,$findcategory,$method);
-//        var_dump($filters);
+
         $user_id=self::getUserId();
-//        echo $user_id;
 
         $request="SELECT * FROM {$tableName} WHERE user_id = '{$user_id}'";
 

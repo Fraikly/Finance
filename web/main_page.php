@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
-$title="Главная";
-require_once "AuthorizationClass.php";
-require_once "html/header.html";
+
 require_once "BdRecordsClass.php";
 
 
@@ -16,6 +14,8 @@ if(isset($_COOKIE["password_2"])){
     header("Location: main_page.php");
 }
 
-
+$title="Главная";
+require_once "AuthorizationClass.php";
+require_once "html/header.html";
 require_once "html/body_main.html";
 require_once "html/footer.html";

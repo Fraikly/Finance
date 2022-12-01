@@ -1,12 +1,6 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
-require_once "AuthorizationClass.php";
-$title="Доходы";
-require_once "html/header.html";
-?>
 
-
-<?php
 
 require_once 'BdRecordsClass.php';
 
@@ -41,6 +35,7 @@ $columns=BdRecordsClass::COLUMN_NAMES;
 if($_POST['name']!=null) {
     BdRecordsClass::createNewRecord($tableName,$columns);
     setcookie("cashBalance",'',time());
+    setcookie('currency','RUB');
     $reload=true;
 }
 
@@ -56,7 +51,9 @@ $all_expense=BdRecordsClass::getRecords($tableName, $category);
 //sum of count
 $sum=BdRecordsClass::getSumCount($all_expense);
 
-
+require_once "AuthorizationClass.php";
+$title="Доходы";
+require_once "html/header.html";
 require_once "html/body_table.html";
 require_once "html/footer.html";
 ?>

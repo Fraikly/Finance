@@ -80,7 +80,19 @@ header {
     color: #FFFFFF;
     text-decoration: none;
 }
-
+.form_currency{
+    display: inline;
+    width: 5%;
+}
+.currency{
+    background-color: black;
+    color: #8841ce;
+    border-color: black;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
 .statistics{
     padding-right: 3%;
     color: #FFFFFF;

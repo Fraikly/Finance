@@ -17,7 +17,15 @@
         <a href="income_page.php" class="income">Доходы </a>
         <?php if(AuthorizationClass::isAutorized()): ?>
         <a href="statistics_page.php" class="statistics">Статистика </a>
-        <label>Баланс: <?php echo AuthorizationClass::getBalance() ?> р.</label>
+        <label style="color:#8841ce;">Баланс: <?php echo AuthorizationClass::getBalance() ?>
+            <form method="post" class="form_currency" action="change_currency.php">
+            <select class="currency" onchange="this.form.submit()" name="currency">
+                <option value="RUB" <?php if($_COOKIE["currency"]=='RUB') echo 'selected' ?>>₽</option>
+                <option  value="USD" <?php if($_COOKIE["currency"]=='USD') echo 'selected' ?>>$</option>
+                <option  value="EUR" <?php if($_COOKIE["currency"]=='EUR') echo 'selected' ?>>€</option>
+            </select>
+            </form>
+        </label>
         <?php else:?>
         <label class="statistics" style="color: #999999">Статистика </label>
         <?php endif; ?>
@@ -33,5 +41,7 @@
 
 
 </header>
+<script>
+</script>
 
 
