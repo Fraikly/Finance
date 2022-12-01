@@ -38,7 +38,7 @@ static function isUserExists(){
     $password = md5($_POST['password']);
     return R::getAll("SELECT * FROM users WHERE username='{$_POST['username']}' and password='{$password}'")!=null;
 }
-static function getBalance(){
+static function getBalance($name=0){
     if(isset($_COOKIE['cashBalance']))
         return $_COOKIE['cashBalance'];
     require_once 'BdRecordsClass.php';
@@ -46,7 +46,7 @@ static function getBalance(){
     $all_expense=BdRecordsClass::getSumCount(BdRecordsClass::getRecords('expenses',BdRecordsClass::CATEGORY_EXPENSE,0,0,"all"));
     setcookie('cashBalance',$all_income-$all_expense);
     require_once 'AccountClass.php';
-    setcookie('currency',AccountClass::getCurrency());
+    setcookie('currency',AccountClass::getCurrency($name));
     return $all_income- $all_expense;
 }
 }
